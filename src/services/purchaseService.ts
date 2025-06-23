@@ -347,8 +347,10 @@ export const handleDailyDealPurchase = async (
         updateCurrency(inventory, dailyDeal.SalePrice, true, purchaseResponse.InventoryChanges);
     }
 
-    inventory.UsedDailyDeals.push(purchaseParams.StoreItem);
-    purchaseResponse.DailyDealUsed = purchaseParams.StoreItem;
+    if (!config.noDailyDealPurchaseLimit) {
+        inventory.UsedDailyDeals.push(purchaseParams.StoreItem);
+        purchaseResponse.DailyDealUsed = purchaseParams.StoreItem;
+    }
 };
 
 export const handleBundleAcqusition = async (

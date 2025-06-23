@@ -39,6 +39,7 @@
   "noArgonCrystalDecay": false,
   "noMasteryRankUpCooldown": false,
   "noVendorPurchaseLimits": false,
+  "noDailyDealPurchaseLimit": false,
   "noDeathMarks": false,
   "noKimCooldowns": false,
   "fullyStockedVendors": false,

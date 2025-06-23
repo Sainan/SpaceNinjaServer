@@ -46,6 +46,7 @@ export interface IConfig {
     noArgonCrystalDecay?: boolean;
     noMasteryRankUpCooldown?: boolean;
     noVendorPurchaseLimits?: boolean;
+    noDailyDealPurchaseLimit?: boolean;
     noDeathMarks?: boolean;
     noKimCooldowns?: boolean;
     fullyStockedVendors?: boolean;

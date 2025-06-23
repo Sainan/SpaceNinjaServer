@@ -156,6 +156,7 @@ dict = {
     cheats_noArgonCrystalDecay: `Aucune désintégration des Cristaux d'Argon`,
     cheats_noMasteryRankUpCooldown: `Aucune attente pour la montée de rang de maîtrise`,
     cheats_noVendorPurchaseLimits: `Aucune limite d'achat chez les PNJ`,
+    cheats_noDailyDealPurchaseLimit: `[UNTRANSLATED] No Daily Deal Purchase Limit`,
     cheats_noDeathMarks: `Aucune marque d'assassin`,
     cheats_noKimCooldowns: `Aucun cooldown sur le KIM`,
     cheats_fullyStockedVendors: `[UNTRANSLATED] Fully Stocked Vendors`,

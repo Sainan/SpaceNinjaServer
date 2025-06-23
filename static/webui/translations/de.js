@@ -156,6 +156,7 @@ dict = {
     cheats_noArgonCrystalDecay: `Argon-Kristalle verschwinden niemals`,
     cheats_noMasteryRankUpCooldown: `Keine Wartezeit beim Meisterschaftsrangaufstieg`,
     cheats_noVendorPurchaseLimits: `Keine Kaufbeschränkungen bei Händlern`,
+    cheats_noDailyDealPurchaseLimit: `[UNTRANSLATED] No Daily Deal Purchase Limit`,
     cheats_noDeathMarks: `Keine Todesmarkierungen`,
     cheats_noKimCooldowns: `Keine Wartezeit bei KIM`,
     cheats_fullyStockedVendors: `[UNTRANSLATED] Fully Stocked Vendors`,

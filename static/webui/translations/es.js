@@ -156,6 +156,7 @@ dict = {
     cheats_noArgonCrystalDecay: `Sin descomposición de cristal de Argón`,
     cheats_noMasteryRankUpCooldown: `Sin tiempo de espera para rango de maestría`,
     cheats_noVendorPurchaseLimits: `Sin límite de compras de vendedores`,
+    cheats_noDailyDealPurchaseLimit: `[UNTRANSLATED] No Daily Deal Purchase Limit`,
     cheats_noDeathMarks: `Sin marcas de muerte`,
     cheats_noKimCooldowns: `Sin tiempo de espera para conversaciones KIM`,
     cheats_fullyStockedVendors: `[UNTRANSLATED] Fully Stocked Vendors`,
