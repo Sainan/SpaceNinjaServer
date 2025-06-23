@@ -11,7 +11,14 @@ import {
 import { getRandomWeightedRewardUc } from "@/src/services/rngService";
 import { applyStandingToVendorManifest, getVendorManifestByOid } from "@/src/services/serversideVendorsService";
 import { IMiscItem } from "@/src/types/inventoryTypes/inventoryTypes";
-import { IPurchaseRequest, IPurchaseResponse, SlotPurchase, IInventoryChanges } from "@/src/types/purchaseTypes";
+import {
+    IPurchaseRequest,
+    IPurchaseResponse,
+    SlotPurchase,
+    IInventoryChanges,
+    PurchaseSource,
+    IPurchaseParams
+} from "@/src/types/purchaseTypes";
 import { logger } from "@/src/utils/logger";
 import worldState from "@/static/fixed_responses/worldState/worldState.json";
 import {
@@ -28,6 +35,7 @@ import {
 import { config } from "./configService";
 import { TInventoryDatabaseDocument } from "../models/inventoryModels/inventoryModel";
 import { fromStoreItem, toStoreItem } from "./itemDataService";
+import { DailyDeal } from "../models/worldStateModel";
 
 export const getStoreItemCategory = (storeItem: string): string => {
     const storeItemString = getSubstringFromKeyword(storeItem, "StoreItems/");
@@ -52,7 +60,7 @@ export const handlePurchase = async (
 
     const prePurchaseInventoryChanges: IInventoryChanges = {};
     let seed: bigint | undefined;
-    if (purchaseRequest.PurchaseParams.Source == 7) {
+    if (purchaseRequest.PurchaseParams.Source == PurchaseSource.Vendor) {
         let manifest = getVendorManifestByOid(purchaseRequest.PurchaseParams.SourceId!);
         if (manifest) {
             manifest = applyStandingToVendorManifest(inventory, manifest);
@@ -69,18 +77,12 @@ export const handlePurchase = async (
             }
             if (!config.dontSubtractPurchaseCreditCost) {
                 if (offer.RegularPrice) {
-                    combineInventoryChanges(
-                        prePurchaseInventoryChanges,
-                        updateCurrency(inventory, offer.RegularPrice[0], false)
-                    );
+                    updateCurrency(inventory, offer.RegularPrice[0], false, prePurchaseInventoryChanges);
                 }
             }
             if (!config.dontSubtractPurchasePlatinumCost) {
                 if (offer.PremiumPrice) {
-                    combineInventoryChanges(
-                        prePurchaseInventoryChanges,
-                        updateCurrency(inventory, offer.PremiumPrice[0], true)
-                    );
+                    updateCurrency(inventory, offer.PremiumPrice[0], true, prePurchaseInventoryChanges);
                 }
             }
             if (!config.dontSubtractPurchaseItemCost) {
@@ -166,18 +168,15 @@ export const handlePurchase = async (
     );
     combineInventoryChanges(purchaseResponse.InventoryChanges, prePurchaseInventoryChanges);
 
-    const currencyChanges = updateCurrency(
+    updateCurrency(
         inventory,
         purchaseRequest.PurchaseParams.ExpectedPrice,
-        purchaseRequest.PurchaseParams.UsePremium
+        purchaseRequest.PurchaseParams.UsePremium,
+        prePurchaseInventoryChanges
     );
-    purchaseResponse.InventoryChanges = {
-        ...currencyChanges,
-        ...purchaseResponse.InventoryChanges
-    };
 
     switch (purchaseRequest.PurchaseParams.Source) {
-        case 1: {
+        case PurchaseSource.VoidTrader: {
             if (purchaseRequest.PurchaseParams.SourceId! != worldState.VoidTraders[0]._id.$oid) {
                 throw new Error("invalid request source");
             }
@@ -186,10 +185,7 @@ export const handlePurchase = async (
             );
             if (offer) {
                 if (!config.dontSubtractPurchaseCreditCost) {
-                    combineInventoryChanges(
-                        purchaseResponse.InventoryChanges,
-                        updateCurrency(inventory, offer.RegularPrice, false)
-                    );
+                    updateCurrency(inventory, offer.RegularPrice, false, purchaseResponse.InventoryChanges);
                 }
                 if (purchaseRequest.PurchaseParams.ExpectedPrice) {
                     throw new Error(`vendor purchase should not have an expected price`);
@@ -207,7 +203,7 @@ export const handlePurchase = async (
             }
             break;
         }
-        case 2:
+        case PurchaseSource.SyndicateFavor:
             {
                 const syndicateTag = purchaseRequest.PurchaseParams.SyndicateTag!;
                 if (purchaseRequest.PurchaseParams.UseFreeFavor!) {
@@ -244,22 +240,22 @@ export const handlePurchase = async (
                 }
             }
             break;
-        case 7:
+        case PurchaseSource.DailyDeal:
+            if (purchaseRequest.PurchaseParams.ExpectedPrice) {
+                throw new Error(`daily deal purchase should not have an expected price`);
+            }
+            await handleDailyDealPurchase(inventory, purchaseRequest.PurchaseParams, purchaseResponse);
+            break;
+        case PurchaseSource.Vendor:
             if (purchaseRequest.PurchaseParams.SourceId! in ExportVendors) {
                 const vendor = ExportVendors[purchaseRequest.PurchaseParams.SourceId!];
                 const offer = vendor.items.find(x => x.storeItem == purchaseRequest.PurchaseParams.StoreItem);
                 if (offer) {
                     if (typeof offer.credits == "number" && !config.dontSubtractPurchaseCreditCost) {
-                        combineInventoryChanges(
-                            purchaseResponse.InventoryChanges,
-                            updateCurrency(inventory, offer.credits, false)
-                        );
+                        updateCurrency(inventory, offer.credits, false, purchaseResponse.InventoryChanges);
                     }
                     if (typeof offer.platinum == "number" && !config.dontSubtractPurchasePlatinumCost) {
-                        combineInventoryChanges(
-                            purchaseResponse.InventoryChanges,
-                            updateCurrency(inventory, offer.platinum, true)
-                        );
+                        updateCurrency(inventory, offer.platinum, true, purchaseResponse.InventoryChanges);
                     }
                     if (offer.itemPrices && !config.dontSubtractPurchaseItemCost) {
                         handleItemPrices(
@@ -275,7 +271,7 @@ export const handlePurchase = async (
                 throw new Error(`vendor purchase should not have an expected price`);
             }
             break;
-        case 18: {
+        case PurchaseSource.PrimeVaultTrader: {
             if (purchaseRequest.PurchaseParams.SourceId! != worldState.PrimeVaultTraders[0]._id.$oid) {
                 throw new Error("invalid request source");
             }
@@ -336,6 +332,23 @@ const handleItemPrices = (
             inventoryChanges.MiscItems.push(invItem);
         }
     }
+};
+
+export const handleDailyDealPurchase = async (
+    inventory: TInventoryDatabaseDocument,
+    purchaseParams: IPurchaseParams,
+    purchaseResponse: IPurchaseResponse
+): Promise<void> => {
+    const dailyDeal = (await DailyDeal.findOne({ StoreItem: purchaseParams.StoreItem }))!;
+    dailyDeal.AmountSold += 1;
+    await dailyDeal.save();
+
+    if (!config.dontSubtractPurchasePlatinumCost) {
+        updateCurrency(inventory, dailyDeal.SalePrice, true, purchaseResponse.InventoryChanges);
+    }
+
+    inventory.UsedDailyDeals.push(purchaseParams.StoreItem);
+    purchaseResponse.DailyDealUsed = purchaseParams.StoreItem;
 };
 
 export const handleBundleAcqusition = async (

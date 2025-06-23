@@ -13,6 +13,7 @@ export interface IWorldState {
     GlobalUpgrades: IGlobalUpgrade[];
     NodeOverrides: INodeOverride[];
     VoidStorms: IVoidStorm[];
+    DailyDeals: IDailyDeal[];
     PVPChallengeInstances: IPVPChallengeInstance[];
     EndlessXpChoices: IEndlessXpChoice[];
     SeasonInfo?: {
@@ -146,6 +147,28 @@ export interface IVoidStorm {
     Activation: IMongoDate;
     Expiry: IMongoDate;
     ActiveMissionTier: string;
+}
+
+export interface IDailyDeal {
+    StoreItem: string;
+    Activation: IMongoDate;
+    Expiry: IMongoDate;
+    Discount: number;
+    OriginalPrice: number;
+    SalePrice: number;
+    AmountTotal: number;
+    AmountSold: number;
+}
+
+export interface IDailyDealDatabase {
+    StoreItem: string;
+    Activation: Date;
+    Expiry: Date;
+    Discount: number;
+    OriginalPrice: number;
+    SalePrice: number;
+    AmountTotal: number;
+    AmountSold: number;
 }
 
 export interface IPVPChallengeInstance {

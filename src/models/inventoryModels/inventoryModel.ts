@@ -1601,6 +1601,9 @@ const inventorySchema = new Schema<IInventoryDatabase, InventoryDocumentProps>(
         PendingSpectreLoadouts: { type: [spectreLoadoutsSchema], default: undefined },
         SpectreLoadouts: { type: [spectreLoadoutsSchema], default: undefined },
 
+        //Darvo Deal
+        UsedDailyDeals: [String],
+
         //New Quest Email
         EmailItems: [typeCountSchema],
 
@@ -1717,7 +1720,6 @@ const inventorySchema = new Schema<IInventoryDatabase, InventoryDocumentProps>(
         //ChallengeInstanceStates: [Schema.Types.Mixed],
         RecentVendorPurchases: { type: [recentVendorPurchaseSchema], default: undefined },
         //Robotics: [Schema.Types.Mixed],
-        //UsedDailyDeals: [Schema.Types.Mixed],
         CollectibleSeries: { type: [collectibleEntrySchema], default: undefined },
         HasResetAccount: { type: Boolean, default: false },
 

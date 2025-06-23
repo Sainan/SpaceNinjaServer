@@ -75,6 +75,7 @@ export interface IConfig {
         duviriOverride?: string;
         nightwaveOverride?: string;
         circuitGameModes?: string[];
+        darvoStockMultiplier?: number;
     };
     dev?: {
         keepVendorsExpired?: boolean;

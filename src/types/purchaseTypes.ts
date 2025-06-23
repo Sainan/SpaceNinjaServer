@@ -10,13 +10,41 @@ import {
     ICrewMemberClient
 } from "./inventoryTypes/inventoryTypes";
 
+export enum PurchaseSource {
+    Market = 0,
+    VoidTrader = 1,
+    SyndicateFavor = 2,
+    DailyDeal = 3,
+    Arsenal = 4,
+    Profile = 5,
+    Hub = 6,
+    Vendor = 7,
+    AppearancePreview = 8,
+    Museum = 9,
+    Operator = 10,
+    PlayerShip = 11,
+    Crewship = 12,
+    MenuStyle = 13,
+    MenuHud = 14,
+    Chat = 15,
+    Inventory = 16,
+    StarChart = 17,
+    PrimeVaultTrader = 18,
+    Incubator = 19,
+    Prompt = 20,
+    Kaithe = 21,
+    DuviriWeapon = 22,
+    UpdateScreen = 23,
+    Motorcycle = 24
+}
+
 export interface IPurchaseRequest {
     PurchaseParams: IPurchaseParams;
     buildLabel: string;
 }
 
 export interface IPurchaseParams {
-    Source: number;
+    Source: PurchaseSource;
     SourceId?: string; // for Source 1, 7 & 18
     StoreItem: string;
     StorePage: string;
@@ -77,6 +105,7 @@ export interface IPurchaseResponse {
     Standing?: IAffiliationMods[];
     FreeFavorsUsed?: IAffiliationMods[];
     BoosterPackItems?: string;
+    DailyDealUsed?: string;
 }
 
 export type IBinChanges = {

@@ -285,6 +285,7 @@ export interface IInventoryClient extends IDailyAffiliations, InventoryClientEqu
     ArchwingEnabled?: boolean;
     PendingSpectreLoadouts?: ISpectreLoadout[];
     SpectreLoadouts?: ISpectreLoadout[];
+    UsedDailyDeals: string[];
     EmailItems: ITypeCount[];
     CompletedSyndicates: string[];
     FocusXP?: IFocusXP;
@@ -349,7 +350,6 @@ export interface IInventoryClient extends IDailyAffiliations, InventoryClientEqu
     //LeagueTickets: any[];
     //Quests: any[];
     //Robotics: any[];
-    //UsedDailyDeals: any[];
     LibraryPersonalTarget?: string;
     LibraryPersonalProgress: ILibraryPersonalProgress[];
     CollectibleSeries?: ICollectibleEntry[];
