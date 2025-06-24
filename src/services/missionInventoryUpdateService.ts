@@ -259,7 +259,9 @@ export const addMissionInventoryUpdates = async (
                 addMissionComplete(inventory, value);
                 break;
             case "LastRegionPlayed":
-                inventory.LastRegionPlayed = value;
+                if (!(config.bugFixes?.ignore1999LastRegionPlayed && value === "1999MapName")) {
+                    inventory.LastRegionPlayed = value;
+                }
                 break;
             case "RawUpgrades":
                 addMods(inventory, value);

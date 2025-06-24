@@ -25,6 +25,10 @@
   "dontSubtractPurchaseStandingCost": false,
   "dontSubtractVoidTraces": false,
   "dontSubtractConsumables": false,
+  "bugFixes": {
+    "ignore1999LastRegionPlayed": false,
+    "fixXtraCheeseTimer": false
+  },
   "unlockAllShipFeatures": false,
   "unlockAllShipDecorations": false,
   "unlockAllFlavourItems": false,

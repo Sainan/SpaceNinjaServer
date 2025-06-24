@@ -65,6 +65,10 @@ export interface IConfig {
     unlockAllSimarisResearchEntries?: boolean;
     spoofMasteryRank?: number;
     nightwaveStandingMultiplier?: number;
+    bugFixes?: {
+        ignore1999LastRegionPlayed?: boolean;
+        fixXtraCheeseTimer?: boolean;
+    };
     worldState?: {
         creditBoost?: boolean;
         affinityBoost?: boolean;
