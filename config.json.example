@@ -25,10 +25,6 @@
   "dontSubtractPurchaseStandingCost": false,
   "dontSubtractVoidTraces": false,
   "dontSubtractConsumables": false,
-  "bugFixes": {
-    "ignore1999LastRegionPlayed": false,
-    "fixXtraCheeseTimer": false
-  },
   "unlockAllShipFeatures": false,
   "unlockAllShipDecorations": false,
   "unlockAllFlavourItems": false,
@@ -62,6 +58,10 @@
   "unlockAllSimarisResearchEntries": false,
   "spoofMasteryRank": -1,
   "nightwaveStandingMultiplier": 1,
+  "unfaithfulBugFixes": {
+    "ignore1999LastRegionPlayed": false,
+    "fixXtraCheeseTimer": false
+  },
   "worldState": {
     "creditBoost": false,
     "affinityBoost": false,

@@ -259,7 +259,7 @@ export const addMissionInventoryUpdates = async (
                 addMissionComplete(inventory, value);
                 break;
             case "LastRegionPlayed":
-                if (!(config.bugFixes?.ignore1999LastRegionPlayed && value === "1999MapName")) {
+                if (!(config.unfaithfulBugFixes?.ignore1999LastRegionPlayed && value === "1999MapName")) {
                     inventory.LastRegionPlayed = value;
                 }
                 break;

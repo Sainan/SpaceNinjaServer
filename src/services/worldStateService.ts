@@ -1333,7 +1333,7 @@ export const getWorldState = (buildLabel?: string): IWorldState => {
     // Live servers only update the start time once it happens, which makes the
     // client show a negative countdown during off-hours. Optionally adjust the
     // times so the next activation is always in the future.
-    if (config.bugFixes?.fixXtraCheeseTimer && timeSecs >= cheeseEnd) {
+    if (config.unfaithfulBugFixes?.fixXtraCheeseTimer && timeSecs >= cheeseEnd) {
         cheeseStart = cheeseNext;
         cheeseEnd = cheeseStart + cheeseDuration;
         cheeseNext += cheeseInterval;
