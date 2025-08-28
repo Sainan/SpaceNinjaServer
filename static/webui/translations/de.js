@@ -210,7 +210,7 @@ dict = {
     cheats_baroFullyStocked: `Baro hat volles Inventar`,
     cheats_syndicateMissionsRepeatable: `Syndikat-Missionen wiederholbar`,
     cheats_unlockAllProfitTakerStages: `Alle Profiteintreiber-Phasen freischalten`,
-    cheats_unlockAllProfitTakerStages_ok: `[UNTRANSLATED] Successfully unlocked all Profit Taker stages`,
+    cheats_unlockAllProfitTakerStages_ok: `[UNTRANSLATED] Successfully unlocked.`,
     cheats_instantFinishRivenChallenge: `Riven-Mod Herausforderung sofort abschließen`,
     cheats_instantResourceExtractorDrones: `Sofortige Ressourcen-Extraktor-Drohnen`,
     cheats_noResourceExtractorDronesDamage: `Kein Schaden für Ressourcen-Extraktor-Drohnen`,

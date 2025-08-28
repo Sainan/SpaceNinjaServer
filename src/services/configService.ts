@@ -109,6 +109,7 @@ export const configRemovedOptionsKeys = [
     "unlockDoubleCapacityPotatoesEverywhere",
     "unlockExilusEverywhere",
     "unlockArcanesEverywhere",
+    "unlockAllProfitTakerStages",
     "noDailyStandingLimits",
     "noDailyFocusLimit",
     "noArgonCrystalDecay",
