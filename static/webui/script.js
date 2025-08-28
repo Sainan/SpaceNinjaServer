@@ -2722,7 +2722,7 @@ async function doUnlockAllMissions() {
 async function doUnlockAllProfitTakerStages() {
     await revalidateAuthz();
     await fetch("/custom/unlockAllProfitTakerStages?" + window.authz);
-    toast(loc("cheats_unlockAllProfitTakerStages_ok"));
+    toast(loc("cheats_unlockSucc"));
 }
 
 const importSamples = {

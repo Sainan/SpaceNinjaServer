@@ -11,7 +11,7 @@ const allEudicoHeistJobs = [
 
 export const unlockAllProfitTakerStagesController: RequestHandler = async (req, res) => {
     const accountId = await getAccountIdForRequest(req);
-    const inventory = await getInventory(accountId);
+    const inventory = await getInventory(accountId, "CompletedJobChains");
     inventory.CompletedJobChains ??= [];
     const chain = inventory.CompletedJobChains.find(x => x.LocationTag == "EudicoHeists");
     if (chain) {
