@@ -27,7 +27,6 @@ export interface IConfig extends IConfigRemovedOptions {
     unlockAllCapturaScenes?: boolean;
     unlockAllDecoRecipes?: boolean;
     fullyStockedVendors?: boolean;
-    unlockAllProfitTakerStages?: boolean;
     skipClanKeyCrafting?: boolean;
     noDojoRoomBuildStage?: boolean;
     noDojoDecoBuildStage?: boolean;
