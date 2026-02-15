@@ -2976,7 +2976,12 @@ function doAcquireCountItems(category) {
         $(`#acquire-type-${category}`).addClass("is-invalid").focus();
         return;
     }
-    const count = parseInt($(`#${category}-count`).val());
+    const rawCount = $(`#${category}-count`).val();
+    const count = parseInt(rawCount, 10);
+    if (rawCount.trim() === "" || Number.isNaN(count)) {
+        toast(loc("code_nothingToDo"));
+        return;
+    }
     if (count != 0) {
         revalidateAuthz().then(() => {
             $.post({
