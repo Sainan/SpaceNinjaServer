@@ -54,7 +54,6 @@
     "@typescript-eslint/parser": "^8.28.0",
     "eslint": "^9.39.4",
     "eslint-plugin-prettier": "^5.2.5",
-    "globals": "^17.4.0",
     "prettier": "^3.5.3",
     "tree-kill": "^1.2.2"
   },

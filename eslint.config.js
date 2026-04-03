@@ -1,7 +1,6 @@
 import js from "@eslint/js";
 import tsPlugin from "@typescript-eslint/eslint-plugin";
 import prettierPlugin from "eslint-plugin-prettier";
-import globals from "globals";
 
 export default [
     {
@@ -10,11 +9,6 @@ export default [
     {
         files: ["**/*.ts"],
         languageOptions: {
-            globals: {
-                ...globals.browser,
-                ...globals.es2021,
-                ...globals.node,
-            },
             parserOptions: {
                 project: "./tsconfig.json",
             },
