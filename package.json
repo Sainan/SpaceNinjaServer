@@ -16,9 +16,9 @@
     "verify:tsc": "tsc --noEmit",
     "raw": "node scripts/raw-precheck.js && node --experimental-transform-types src/index.ts",
     "raw:bun": "bun src/index.ts",
-    "lint": "eslint --ext .ts .",
-    "lint:ci": "eslint --ext .ts --rule \"prettier/prettier: off\" .",
-    "lint:fix": "eslint --fix --ext .ts .",
+    "lint": "eslint \"**/*.ts\"",
+    "lint:ci": "eslint \"**/*.ts\" --rule \"prettier/prettier: off\"",
+    "lint:fix": "eslint --fix \"**/*.ts\"",
     "prettier": "prettier --write .",
     "update-translations": "cd scripts && node update-translations.cjs",
     "fix": "npm run update-translations && npm run prettier"
@@ -50,9 +50,10 @@
     "typescript": "^5.7"
   },
   "devDependencies": {
+    "@eslint/eslintrc": "^3.3.5",
     "@typescript-eslint/eslint-plugin": "^8.28.0",
     "@typescript-eslint/parser": "^8.28.0",
-    "eslint": "^8",
+    "eslint": "^9.39.4",
     "eslint-plugin-prettier": "^5.2.5",
     "prettier": "^3.5.3",
     "tree-kill": "^1.2.2"
