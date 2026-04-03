@@ -46,8 +46,7 @@
     "@types/morgan": "^1.9.9",
     "@types/websocket": "^1.0.10",
     "@types/ws": "^8.18.1",
-    "@typescript/native-preview": "^7.0.0-dev.20260308.1",
-    "typescript": "^5.7"
+    "@typescript/native-preview": "^7.0.0-dev.20260308.1"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^8.28.0",
@@ -55,7 +54,8 @@
     "eslint": "^9.39.4",
     "eslint-plugin-prettier": "^5.2.5",
     "prettier": "^3.5.3",
-    "tree-kill": "^1.2.2"
+    "tree-kill": "^1.2.2",
+    "typescript": "^5.7"
   },
   "engines": {
     "node": ">=20.18.1"
