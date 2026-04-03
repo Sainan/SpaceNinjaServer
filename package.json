@@ -50,11 +50,11 @@
     "typescript": "^5.7"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3.3.5",
     "@typescript-eslint/eslint-plugin": "^8.28.0",
     "@typescript-eslint/parser": "^8.28.0",
     "eslint": "^9.39.4",
     "eslint-plugin-prettier": "^5.2.5",
+    "globals": "^17.4.0",
     "prettier": "^3.5.3",
     "tree-kill": "^1.2.2"
   },

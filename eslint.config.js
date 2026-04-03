@@ -1,32 +1,32 @@
-import { FlatCompat } from "@eslint/eslintrc";
 import js from "@eslint/js";
-import { dirname } from "node:path";
-import { fileURLToPath } from "node:url";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-const compat = new FlatCompat({
-    baseDirectory: __dirname,
-    recommendedConfig: js.configs.recommended,
-    allConfig: js.configs.all,
-});
+import tsPlugin from "@typescript-eslint/eslint-plugin";
+import prettierPlugin from "eslint-plugin-prettier";
+import globals from "globals";
 
 export default [
     {
         ignores: ["build/**", "node_modules/**"],
     },
-    ...compat.config({
-        plugins: ["@typescript-eslint", "prettier"],
-        extends: [
-            "eslint:recommended",
-            "plugin:@typescript-eslint/recommended",
-            "plugin:@typescript-eslint/recommended-requiring-type-checking",
-        ],
-        env: {
-            browser: true,
-            es6: true,
-            node: true,
+    {
+        files: ["**/*.ts"],
+        languageOptions: {
+            globals: {
+                ...globals.browser,
+                ...globals.es2021,
+                ...globals.node,
+            },
+            parserOptions: {
+                project: "./tsconfig.json",
+            },
+        },
+    },
+    js.configs.recommended,
+    ...tsPlugin.configs["flat/recommended"],
+    ...tsPlugin.configs["flat/recommended-type-checked"],
+    {
+        files: ["**/*.ts"],
+        plugins: {
+            prettier: prettierPlugin,
         },
         rules: {
             "@typescript-eslint/consistent-type-imports": "error",
@@ -48,9 +48,5 @@ export default [
             "@typescript-eslint/require-await": "error",
             "@typescript-eslint/no-deprecated": "warn",
         },
-        parser: "@typescript-eslint/parser",
-        parserOptions: {
-            project: "./tsconfig.json",
-        },
-    }),
+    },
 ];
